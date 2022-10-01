@@ -1,0 +1,58 @@
+Name            TC2_1V4_t3;
+Partno          ;
+Revision        01;
+Date            28/09/2022;
+Designer        Alvaro ALea;
+Company         None;
+Location        None;
+Assembly        None;
+Device          g16v8;
+
+/* Inputs */
+pin 1 = DSL;      /*  */
+pin 2 = A19;      /*  */
+pin 3 = A18;      /*  */
+pin 4 = A17;      /*  */
+pin 5 = A16;      /*  */
+pin 6 = A15;      /*  */
+pin 7 = RST;      /*  */
+pin 8 = A14;      /*  */
+pin 9 = A13;      /*  */
+pin 11 = MUX;      /*  */
+
+/* Outputs */
+pin 12 = DSMC;     /*  */
+pin 13 = P13;      /*  */
+pin 14 = CLKCT;    /*  */
+pin 15 = MA8;      /*  */
+pin 17 = FDC_CS;   /*  */
+pin 18 = U17_CS;   /*  */
+pin 19 = ROM_CS;   /*  */
+
+/* Pinnodes */
+pinnode 16 = P16;      /*  */
+
+/* equations */
+CLKCT = !DSL ;
+MA8 = !( (A17 & MUX ) # (A16 & !MUX) );
+
+IODIR =  !A19 & !A18 & !A17 &  A16 &  A15 & A14 ;
+U17_CS = !(IODIR &  A13) # DSL;
+FDC_CS = !(IODIR & !A13) # DSL;
+
+ROMDIR = !A19 & !A18 & !A17 &  A16 & !A15 ;
+ROM_CS =!ROMDIR # DSL;
+
+DSMC = ROMDIR # IODIR;
+
+
+P16 = !(( !DSL & !A19 & !A18 & !A17 & A16 & !A15 & !A14 )
+      # ( !P16 & RST ));
+
+P13 = !(( !DSL & !A19 & !A18 & !A17 & !A16 & A15 & A14 & P16)
+      # (  A19 & RST & !P13 )
+      # (  A18 & RST & !P13 )
+      # (  A17 & RST & !P13 )
+      # ( !A16 & RST & !P13 )
+      # (  A15 & RST & !P13 )
+      # (  DSL & RST & !P13 ));

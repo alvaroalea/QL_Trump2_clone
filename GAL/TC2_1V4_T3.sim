@@ -1,0 +1,71 @@
+%SIGNAL
+PIN   9 =  A13 
+PIN   8 =  A14 
+PIN   6 =  A15 
+PIN   5 =  A16 
+PIN   4 =  A17 
+PIN   3 =  A18 
+PIN   2 =  A19 
+PIN  14 =  CLKCT 
+PIN   1 =  DSL 
+PIN  12 =  DSMC 
+PIN  17 =  FDC_CS 
+PIN  15 =  MA8 
+PIN  11 =  MUX 
+PIN  13 =  P13 
+PIN  16 =  P16 
+PIN  19 =  ROM_CS 
+PIN   7 =  RST 
+PIN  18 =  U17_CS 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CLKCT =>
+    !DSL
+
+DSMC =>
+    !A15 & A16 & !A17 & !A18 & !A19
+  # A14 & A15 & A16 & !A17 & !A18 & !A19
+
+FDC_CS =>
+    A19
+  # A18
+  # A17
+  # !A16
+  # !A15
+  # !A14
+  # A13
+  # DSL
+
+IODIR =>
+    A14 & A15 & A16 & !A17 & !A18 & !A19
+
+MA8 =>
+    A17 & MUX
+  # A16 & !MUX
+
+ROMDIR =>
+    !A15 & A16 & !A17 & !A18 & !A19
+
+ROM_CS =>
+    A19
+  # A18
+  # A17
+  # !A16
+  # A15
+  # DSL
+
+U17_CS =>
+    A19
+  # A18
+  # A17
+  # !A16
+  # !A15
+  # !A14
+  # !A13
+  # DSL
+
+%END
