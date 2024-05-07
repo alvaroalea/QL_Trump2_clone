@@ -1,3 +1,4 @@
 (fp_lib_table
+  (version 7)
   (lib (name "ql qdisk mark1 7")(type "KiCad")(uri "")(options "")(descr ""))
 )
