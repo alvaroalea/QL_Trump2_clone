@@ -15,8 +15,6 @@ Gal U1, source code included, only one need for 0K version.
 
 HOLD
 
-I have not tested with memory, only the 0Kb version with my GAL code, but I got report of people that put memory and use original GAL code and work.
-
 ![My image](ql_trump_v2_disk_interface.png) 
 
 ![My image](ql_trump_v2_disk_interface_back.png) 
