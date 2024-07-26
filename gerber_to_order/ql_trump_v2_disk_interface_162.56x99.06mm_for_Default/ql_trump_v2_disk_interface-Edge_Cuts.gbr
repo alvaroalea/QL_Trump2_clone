@@ -1,11 +1,11 @@
-%TF.GenerationSoftware,KiCad,Pcbnew,7.0.11+1*%
-%TF.CreationDate,2024-05-08T20:05:28+02:00*%
+%TF.GenerationSoftware,KiCad,Pcbnew,8.0.3+1*%
+%TF.CreationDate,2024-07-26T18:12:46+02:00*%
 %TF.ProjectId,ql_trump_v2_disk_interface,716c5f74-7275-46d7-905f-76325f646973,01*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Profile,NP*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.11+1) date 2024-05-08 20:05:28*
+G04 Created by KiCad (PCBNEW 8.0.3+1) date 2024-07-26 18:12:46*
 %MOMM*%
 %LPD*%
 G01*
@@ -23,12 +23,12 @@ X38862000Y-44323000D02*
 X38862000Y-143344900D01*
 X114427000Y-47498000D02*
 G75*
-G03*
+G02*
 X110617000Y-47498000I-1905000J0D01*
 G01*
 X110617000Y-47498000D02*
 G75*
-G03*
+G02*
 X114427000Y-47498000I1905000J0D01*
 G01*
 X38862000Y-143344900D02*
