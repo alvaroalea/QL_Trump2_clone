@@ -6,7 +6,7 @@
 	(paper "A2")
 	(title_block
 		(title "Trump Card 2 (Clone)")
-		(date "2024-07-26")
+		(date "2024-08-13")
 		(rev "01")
 		(company "Repro by Alvaro Alea Fdz.")
 		(comment 1 "Disk Interface for Sinclair QL")
@@ -20468,9 +20468,9 @@
 		)
 		(uuid "fdb71813-5618-4895-b296-ed999a695c9c")
 	)
-	(text "NOTE:\n\nC1,C10,C12,C15,C17 to C22 to C10 is in some photos 100nF (104 disc or yellow) \nand in another 330nF (330n blue) value is not critical.\n\nC14,C16,C23-C25 are also no critical, and size shall be checked as can conflict \nwith memory chips and 7805, consider use 33uF/25V for C14\n\n"
+	(text "NOTE:\n\nC1,C10,C12,C15,C17 to C22 to C10 is in some photos 100nF (104 disc or yellow) \nand in another 330nF (330n blue) value is not critical.\n\nC14,C16,C23-C25 are also no critical, and size shall be checked as can conflict\nwith memory chips and 7805, consider use 33uF/25V for C14\n\nU14 is originally a 32Kb EPROM (UV Erasable) but a W27C512 (64Kb EEPROM) will work, if\nyou burn the ROM image in the top 32Kb of the memory. \n\n\n"
 		(exclude_from_sim no)
-		(at 478.536 365.506 0)
+		(at 475.996 358.394 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -26196,7 +26196,7 @@
 		(fields_autoplaced yes)
 		(uuid "28bba087-4ad1-4e45-b386-5e9d087f20bc")
 		(property "Reference" "U14"
-			(at 156.9594 31.115 0)
+			(at 157.1341 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -26204,8 +26204,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "27C128"
-			(at 156.9594 33.655 0)
+		(property "Value" "27C256"
+			(at 157.1341 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
