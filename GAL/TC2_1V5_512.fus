@@ -1,0 +1,82 @@
+
+
+Pin 19 = /ROMCS       XOR = 0   AC1 = 1
+  0  ---- ---- ---- ---- ---- ---- ---- ----
+  1  -x-x -x-- -x-- x--- -x-- ---- ---- ----
+  2  x--x x--- -x-- -x-- -x-- ---- ---x ----
+  3  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+  4  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+  5  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+  6  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+  7  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+Pin 18 = /U17CS       XOR = 0   AC1 = 1
+  8  ---- ---- ---- ---- ---- ---- ---- ----
+  9  -x-x -x-- -x-- x--- x--- ---- x--- x---
+ 10  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 11  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 12  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 13  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 14  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 15  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+Pin 17 = /FDCCS       XOR = 0   AC1 = 1
+ 16  ---- ---- ---- ---- ---- ---- ---- ----
+ 17  -x-x -x-- -x-- x--- x--- ---- x--- -x--
+ 18  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 19  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 20  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 21  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 22  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 23  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+Pin 16 = P16          XOR = 0   AC1 = 1
+ 24  ---- ---- ---- ---- ---- ---- ---- ----
+ 25  -x-x -x-- -x-- x--- -x-- ---- -x-- ----
+ 26  ---- ---- ---- ---x ---- x--- ---- ----
+ 27  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 28  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 29  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 30  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 31  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+Pin 15 = MA8          XOR = 0   AC1 = 1
+ 32  ---- ---- ---- ---- ---- ---- ---- ----
+ 33  ---- ---- x--- ---- ---- ---- ---- --x-
+ 34  ---- ---- ---- x--- ---- ---- ---- ---x
+ 35  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 36  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 37  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 38  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 39  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+Pin 14 = CLKCT        XOR = 1   AC1 = 1
+ 40  ---- ---- ---- ---- ---- ---- ---- ----
+ 41  ---x ---- ---- ---- ---- ---- ---- ----
+ 42  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 43  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 44  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 45  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 46  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 47  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+
+Pin 13 = P13          XOR = 0   AC1 = 1
+ 48  ---- ---- ---- ---- ---- ---- ---- ----
+ 49  -x-x -x-- -x-- -xx- x--- ---- x--- ----
+ 50  x--- ---- ---- ---- ---- x--- ---x ----
+ 51  ---- x--- ---- ---- ---- x--- ---x ----
+ 52  ---- ---- x--- ---- ---- x--- ---x ----
+ 53  ---- ---- ---- -x-- ---- x--- ---x ----
+ 54  ---- ---- ---- ---- x--- x--- ---x ----
+ 55  --x- ---- ---- ---- ---- x--- ---x ----
+
+Pin 12 = DSMC         XOR = 1   AC1 = 1
+ 56  ---- ---- ---- ---- ---- ---- ---- ----
+ 57  -x-x -x-- -x-- x--- -x-- ---- ---- ----
+ 58  -x-x -x-- -x-- x--- x--- ---- x--- ----
+ 59  -x-x x--- ---- ---- ---- ---- ---- ----
+ 60  x--x -x-- ---- ---- ---- ---- ---- ----
+ 61  x--x x--- -x-- -x-- -x-- ---- ---x ----
+ 62  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 63  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+

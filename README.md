@@ -6,10 +6,11 @@ License under: CERN Open Hardware Licence Version 2 - Strongly Reciprocal
 
 https://ohwr.org/cern_ohl_s_v2.txt
 
-Available in the market in 4 ways, 0K, 256Kb, 512Kb, 768Kb and Treo (256Kb aditional).
+Available in the market in 4 ways, 0K, 256Kb, 512Kb, 768Kb and Treo/ACE (256Kb aditional).
 
 Only 0Kb has been tested.
-Gal U1, source code included, only one need for 0K version.
+
+Check the readme in the GAL folder, up to now, I only be able to make it work without RAM.
 
 # Technical Info
 

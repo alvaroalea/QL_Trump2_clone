@@ -6,8 +6,8 @@
 	(paper "A2")
 	(title_block
 		(title "Trump Card 2 (Clone)")
-		(date "2024-08-13")
-		(rev "01")
+		(date "2024-11-11")
+		(rev "1.1")
 		(company "Repro by Alvaro Alea Fdz.")
 		(comment 1 "Disk Interface for Sinclair QL")
 	)
@@ -20468,6 +20468,16 @@
 		)
 		(uuid "fdb71813-5618-4895-b296-ed999a695c9c")
 	)
+	(text "(T1)"
+		(exclude_from_sim no)
+		(at 286.512 215.646 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "0da721bb-ea73-4644-8224-f7e0ffda3fdb")
+	)
 	(text "NOTE:\n\nC1,C10,C12,C15,C17 to C22 to C10 is in some photos 100nF (104 disc or yellow) \nand in another 330nF (330n blue) value is not critical.\n\nC14,C16,C23-C25 are also no critical, and size shall be checked as can conflict\nwith memory chips and 7805, consider use 33uF/25V for C14\n\nU14 is originally a 32Kb EPROM (UV Erasable) but a W27C512 (64Kb EEPROM) will work, if\nyou burn the ROM image in the top 32Kb of the memory. \n\n\n"
 		(exclude_from_sim no)
 		(at 475.996 358.394 0)
@@ -20489,6 +20499,26 @@
 			(justify left bottom)
 		)
 		(uuid "38dd2219-01b4-4ee8-b414-ad204740dbc3")
+	)
+	(text "BANK for 512,768"
+		(exclude_from_sim no)
+		(at 460.756 187.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "3d849be2-1fed-4988-9d06-e3cdf9c434ec")
+	)
+	(text "(T2)"
+		(exclude_from_sim no)
+		(at 310.134 234.188 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "3f2c60c0-cc65-4cc9-8ea8-93dcd74baffb")
 	)
 	(text "DS0\n"
 		(exclude_from_sim no)
@@ -20578,6 +20608,16 @@
 		)
 		(uuid "ac6a623a-27cc-4946-b65e-39d7d26ae5e1")
 	)
+	(text "(T3)"
+		(exclude_from_sim no)
+		(at 57.912 222.504 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "b07612a7-d6c6-4d77-b6b2-386eb1e3e51c")
+	)
 	(text "Only Install for with RAM chips"
 		(exclude_from_sim no)
 		(at 101.473 354.076 0)
@@ -20588,6 +20628,16 @@
 			(justify left bottom)
 		)
 		(uuid "bf694c38-d843-4921-a364-b2de82bed2c2")
+	)
+	(text "BANK for 768, ACE"
+		(exclude_from_sim no)
+		(at 407.416 187.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "c267427b-66f6-4da2-bedc-ce5d0cb8cf21")
 	)
 	(text "N/C"
 		(exclude_from_sim no)
@@ -20610,6 +20660,26 @@
 			(justify left bottom)
 		)
 		(uuid "eeaca18a-8da8-4bb0-9b77-d713bed521d7")
+	)
+	(text "BANK for 256, 512,768"
+		(exclude_from_sim no)
+		(at 508.254 188.722 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "f2f843fa-4b8f-4f73-a804-a5e10b1570d8")
+	)
+	(text "(T2)"
+		(exclude_from_sim no)
+		(at 51.308 216.916 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "fc7810cc-97da-4729-84b0-4e9932b7db0e")
 	)
 	(label "D4"
 		(at 206.248 49.53 0)

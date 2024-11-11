@@ -1,0 +1,100 @@
+GAL16V8
+Trump_GAL2
+
+;1, 2,  3,  4,  5,  6,   7,   8,   9, 10
+P13 A19 A18 A17 /DS CTQ2 CTQ1 CTQ0 T2 GND
+T3 /CAS MUX /DTACK1 T1 /DTACK2 /RAS2 /RAS1 /RAS0 VCC
+;11,12, 13, 14,     15,16,      17,   18,   19,   20
+
+;Equations:
+
+DTACK1 = DS *  A19 * /A18       * /CTQ2 * T1 +  ; Block 1 (Ras 0)
+         DS *  A19 * /A18       * /CTQ1 * T1 +
+         DS *  A19 * /A18       * /CTQ0 * T1 +
+
+         DS * /A19 *  A18       * /CTQ2 * T1 +  ; Block 2 (Ras 1)
+         DS * /A19 *  A18       * /CTQ1 * T1 +
+         DS * /A19 *  A18       * /CTQ0 * T1 +
+
+         DS *  A19 *  A18 *  A17 * /CTQ0 * T1    ; Block 3 (Ras 2)
+DTACK2 = DS *  A19 *  A18 *  A17 * /CTQ2 * T1 +
+         DS *  A19 *  A18 *  A17 * /CTQ1 * T1 +
+         DS *  A19 *  A18 * /A17 * /CTQ2 * T1 * P13 +
+         DS *  A19 *  A18 * /A17 * /CTQ1 * T1 * P13 +
+         DS *  A19 *  A18 * /A17 * /CTQ0 * T1 * P13 +
+
+         DS        *  A18        * CTQ2 * CTQ1 * CTQ0 * /T3 +  ; Unknow
+         DS *  A19               * CTQ2 * CTQ1 * CTQ0 * /T3 +
+
+
+CAS  = DS *  A19 *  A18 * /A17 * CTQ2 * CTQ1 * CTQ0 * /P13 +
+       DS * /A19 * /A18 *      * CTQ2 * CTQ1 * CTQ0 +
+
+       DS *         A18  * T1 +  ; Normal CAS signal ??
+       DS *  A19         * T1    ; Normal CAS signal ??
+
+
+RAS2 = DS *  A19 *  A18 * /A17 * CTQ2 * CTQ1 * CTQ0 * /MUX * /P13 +  ; This is common to all RAS
+       DS        *  A18        * CTQ2 * CTQ1 * CTQ0 * /T3 +
+       DS *  A19               * CTQ2 * CTQ1 * CTQ0 * /T3 +
+       DS * /A19 * /A18        * CTQ2 * CTQ1 * CTQ0 * /MUX +
+
+       DS *  A19 *  A18 * /A17 * T2 * P13 +  ; normal RAS 2 signal
+       DS *  A19 *  A18 * A17  * T2
+
+RAS1 = DS *  A19 *  A18 * /A17 * CTQ2 * CTQ1 * CTQ0 * /MUX * /P13 + ; This is common to all RAS
+       DS        *  A18        * CTQ2 * CTQ1 * CTQ0 * /T3 +
+       DS *  A19               * CTQ2 * CTQ1 * CTQ0 * /T3 +
+       DS * /A19 * /A18        * CTQ2 * CTQ1 * CTQ0 * /MUX +
+
+       DS *  A19 * /A18 * T2 ; normal RAS 1 signal
+
+RAS0 = DS *  A19 *  A18 * /A17 * CTQ2 * CTQ1 * CTQ0 * /MUX * /P13 + ; This is common to all RAS
+       DS        *  A18        * CTQ2 * CTQ1 * CTQ0 * /T3 +
+       DS *  A19               * CTQ2 * CTQ1 * CTQ0 * /T3 +
+       DS * /A19 * /A18        * CTQ2 * CTQ1 * CTQ0 * /MUX +
+
+       DS * /A19 *  A18 * T2 ; normal RAS 0 signal
+
+
+DESCRIPTION
+
+WARNING!!! INCOMPLETE!!!
+
+Ram alwais active (has /OE tied to GND) so output/input only depend on complete of RAS/CAS cycle.
+U4 is a binary counter, so "CTQ2 * CTQ1 * CTQ0" is activate each 8 clock counts.
+
+There are three temporization by RC delays:
+
+On access to memory, CAS is inmediately activated, so address column is lock into RAM chips.
+After, MUX is activated and LS157 swap A lines (GAL1 swap A16/A17 also).
+After, T1 is lowered removing CAS
+After, T2 is activated, causing real RAS
+AFter, T3 is activated and sometimes with RAS happend.
+
+CAS is activated:
+ - When correspond for memory access (T1) for all banks.
+ - When is accesing to other ares of memory, but Early.
+
+RAS is activated:
+ - When correspond for memory access (T2) for specific bank.
+ - in specific moments each 8 cicles, after the normal real cycle.
+
+DTACK1/DTACK2 are grouped because not enought sum term in equations.
+ - activated on any access to ram if counter is not 8
+ - not clear when on T3.
+
+
+        0     MUX      T1     T2     T3
+DS      ?????????????????????????????????
+CLK     /------\______???????????????????
+MUX     _______/-------??????????????????
+T1      ---------------\______???????????
+T2      _____________________/-----------
+T3      _______________________________/-
+
+CAS   --\__________________________________/  For Not RAM.
+CAS   --\_________________/----------------   For RAM access.
+RASn  ------------------------\_________
+DTACKn----------------\_________________
+
