@@ -12,14 +12,17 @@ U17CS = DSL * /A19 * /A18 * /A17 * A16 * A15 * A14 *  A13  ; 8Kb of I/O on 0x1E0
 ROMCS = DSL * /A19 * /A18 * /A17 *  A16 * /A15
       + DSL *  A19 *  A18 * /A17 * /A16 * /A15 * /P13
 
-; Disable the 32Kb of ROM, the 16Kb of I/O, 512Kb of RAM and the second copy of ROM when pagged.
-DSMC  = DSL * /A19 * /A18 * /A17 * A16 * /A15
-      + DSL * /A19 * /A18 * /A17 * A16 *  A15 * A14
+; Disable: (ACE is 256Kb is bank 3 + ROM in bank 3)
+DSMC  = DSL * /A19 * /A18 * /A17 * A16 * /A15       ; the 32Kb of ROM,
+      + DSL * /A19 * /A18 * /A17 * A16 *  A15 * A14 ; the 16Kb of I/O
 
-      + DSL * /A19 *  A18
-      + DSL *  A19 * /A18
+;      + DSL * /A19 *  A18         ; bank 1
+;      + DSL *  A19 * /A18         ; bank 2
+      + DSL *  A19 *  A18         ; bank 3
+;      + DSL * A19                 ; bank 2 & 3 of RAM (thats include also the second copy of ROM when pagged).
+;      + DSL *  A19 *  A18 * P13   ; bank 3 of RAM
+;      + DSL *  A19 *  A18 * /A17 * /A16 * /A15 * /P13 ; bank 3 of ROM
 
-      + DSL *  A19 *  A18 * /A17 * /A16 * /A15 * /P13
 
 ; Really only used on dram memory on original Trump Card, not tested.
 CLKCT = DSL  ; this is a NOT because defined /DSL as input.

@@ -1,0 +1,114 @@
+GAL16V8
+TrumCardA
+
+P13 A19 A18 A17 DSL CTQ2 CTQ1 CTQ0 T2 GND
+T3 /CASL MUX /DTACK1L T1 /DTACK2L /RAS2L /RAS1L /RAS0L VCC
+
+RAS0L =  A19 *  A18 * /A17 * /P13 * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
+      +  A19                     * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
+      + /A19 * /A18              * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
+      + /A19 *  A18              * /DSL * T2
+
+RAS1L =  A19 *  A18 * /A17 * /P13 * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
+      +         A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
+      + /A19 * /A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
+      +  A19 * /A18               * /DSL * T2
+
+RAS2L =  A19 *  A18 * /A17 * /P13 * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
+      + /A19 *  A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
+      +  A19 * /A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
+      + /A19 * /A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
+      +  A19 *  A18 * /A17 * P13  * /DSL * T2
+      +  A19 *  A18 *  A17        * /DSL * T2
+
+; Disable CAS:
+;     when T1 on any access to RAM (banks 1,2,3)
+;     when other memory and not refresh
+;     when access ROM pagged in bank 3 and not refresh
+CASL =         A18        * /DSL * T1
+     +  A19               * /DSL * T1
+     + /A19 * /A18        * /DSL * CTQ2 * CTQ1 * CTQ0
+     +  A19 *  A18 * /A17 * /DSL * CTQ2 * CTQ1 * CTQ0 * /P13
+
+
+DTACK2L =         A18               * /DSL * /T3 * CTQ2 * CTQ1 * CTQ0
+        +  A19                      * /DSL * /T3 * CTQ2 * CTQ1 * CTQ0
+
+        +  A19 *  A18 * P13  * /A17 * /DSL * T1 * /CTQ2
+        +  A19 *  A18 * P13  * /A17 * /DSL * T1 * /CTQ1
+        +  A19 *  A18 * P13  * /A17 * /DSL * T1 * /CTQ0
+
+        +  A19 *  A18 * A17         * /DSL * T1 * /CTQ2
+        +  A19 *  A18 * A17         * /DSL * T1 * /CTQ1
+DTACK1L =  A19 *  A18 * A17         * /DSL * T1 * /CTQ0
+
+        +  A19 * /A18               * /DSL * T1 * /CTQ2
+        +  A19 * /A18               * /DSL * T1 * /CTQ1
+        +  A19 * /A18               * /DSL * T1 * /CTQ0
+
+        + /A19 *  A18               * /DSL * T1 * /CTQ2
+        + /A19 *  A18               * /DSL * T1 * /CTQ1
+        + /A19 *  A18               * /DSL * T1 * /CTQ0
+
+
+
+DESCRIPTION:
+CAS, RAS Generation for RAM of Trump Card 2
+
+Ram alwais active (has /OE tied to GND) so output/input only depend on complete of RAS/CAS cycle.
+U4 is a binary counter, so "CTQ2 * CTQ1 * CTQ0" is activate each 8 memory access cycles (because is clocked to DS (positive).
+
+RAM use CAS before RAS refresh cycle, that use internal counter of memory.
+
+CAS is lowered for all banks.
+MUX is activated
+RAS is lowered for selected bank and for all banks if refresh cycle.
+CAS go up along with RAS of unused banks, this complete the refresh cycle CAS-before-RAS
+CAS is lower again with DTACK this cause the RAS-CAS cycle on the selected bank.
+CAS, RAS and DTACK go up.
+
+this is not correct and mux is not syncronized.
+
+SAMPLE OF READING BANK 1
+
+DS    ---------\______________/---------
+CLKCT _________/--------------\_________
+MUX   ------------\___________/---------   (a 1 inmediato por descargar a traves del diodo, a 0 tarda por carga C5 a traves de R3)
+T1    _______________/--------\_________   (a 0 inmediato por diodo D9, a 1 tarda lo que descarge C4 por R2)
+T2    ------------------\_____/---------   (a 1 inmediato por diodo D5, a 0 tarda por carga de C3 a traves de R1)
+T3    ---------------------\__/---------   (a 1 inmediato por diodo D4, a 0 tarda por descarga de C2 a traves de R4)
+
+      WITH CTQ0 & CTQ1 & CTQ2        OTHER SITUATIONS
+DS    ---\__________________/--- ---\__________________/---
+CLKCT ___/------------------\___ ___/------------------\___
+MUX   -------\______________/--- ------\_______________/---
+T1    __________/-----------\___ __________/-----------\___
+T2    --------------\_______/--- --------------\_______/---
+T3    ------------------\___/--- ------------------\___/---
+
+CAS   ---\__________/---\___/--- ---\__________/---\___/---
+RAS0  ----------\___/----------- --------------------------
+RAS1  ----------\___________/--- ----------\___________/---
+RAS2  ----------\___/----------- --------------------------
+DTACK ------------------\___/--- ------------------\___/---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,19 +1,40 @@
 # GAL Equations and JEDEC files
 
-## Chip 2
+Trump Card contains 2 programable logic chips for several functions:
+* Chip 1 is in charge of the I/O and Rom mapping, incorporate the mechanism to pagged in and out ROM and RAM in 0xC0000 on boot to allow JS ROM to start.
+* Chip 2 is in charge of the RAS/CAS generation and other signals for the RAM chips.
 
-This chip manage the Dinamic RAM access, and I can't decypher its operation, provide a PDF and JED from tetroid, and my own try in a PLD file (for compiling with GALASM)
+In the original cards, both chips are of type PAL16L8, that is obsolete nowdays.
 
-## Chip 1
+There is only 1 version of the Chip 1, and have a sticker with "1V4"
 
-### TC2_1V4
-This JED/Equations are a barely working files, to be used only with a Minerva ROM, not incorporate the mechanism of ROM  pagging need with JS ROMs
+There is 2 diferent version of Chip 1, one for Trump Card 1 (with 24 RAM chips) labeled "2V2" and another for Trump Card 2 (6 RAM chips) labeled "2V4"
 
-This files are for compiling with WinCulp
 
-### TC2_1V5
-This PLD files are for compile with GALASM
+## Tetroid
 
-They incorporate the mechanism to pagged ROM in 0xC0000 on boot to allow JS ROM to start.
+This directory there is the equations shared by Tetroid and others in several places of internet.
 
-There are 4 combinations, and depend on the installed memory, but only 0Kb has been tested as working.
+Chip 1 is know to work if burn in a GAL16V8 chip, included JED files of the TC1, TC2 and Tetroid version, that are equal when disasembled.
+
+Chip 2 for TC1 include dump and GALASM source.
+
+Chip 2 for TC2 include JED for GAL and PAL, but is know that only the PAL work.
+
+## only_minerva
+
+My own version of the equations of the chip 1, intended to be used in a board without RAM with external RAM expansion.
+
+This version only work with Minerva ROM, because it lack the pagging mechanism needed to boot in a JS ROM.
+
+Include the Winculp source.
+
+## wip
+
+The Work-In-Progress ecuations
+
+Chip 1 version with the pagging mechanish that work in JS and Minerva Roms. Miracle sell serveral version of the card with diferent memory configurations, its not clear if the ecuations of the chips are the same in all version, but in my test I need to develop version for each memory configuration. Source is in GALASM format
+
+Only 0Kb has been tested.
+
+Chip 2 are still not working, but include some test in GALASM and Winculp formats, and some notes.

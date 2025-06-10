@@ -76,7 +76,7 @@ Pin 12 = DSMC         XOR = 1   AC1 = 1
  58  -x-x -x-- -x-- x--- x--- ---- x--- ----
  59  -x-x x--- ---- ---- ---- ---- ---- ----
  60  x--x -x-- ---- ---- ---- ---- ---- ----
- 61  x--x x--- -x-- -x-- -x-- ---- ---x ----
- 62  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
- 63  xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx
+ 61  x--x x--- ---- ---- ---- ---- --x- ----
+ 62  x--x x--- x--- ---- ---- ---- ---x ----
+ 63  x--x x--- -x-- -x-- -x-- ---- ---x ----
 
