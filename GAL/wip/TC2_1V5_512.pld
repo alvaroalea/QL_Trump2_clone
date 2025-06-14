@@ -1,5 +1,5 @@
 GAL16V8
-TrumCard3
+TrumCardA
 
 /DSL A19 A18 A17 A16 A15 RST A14 A13 GND
 MUX DSMC P13 CLKCT MA8 P16 /FDCCS /U17CS /ROMCS VCC
@@ -12,16 +12,15 @@ U17CS = DSL * /A19 * /A18 * /A17 * A16 * A15 * A14 *  A13  ; 8Kb of I/O on 0x1E0
 ROMCS = DSL * /A19 * /A18 * /A17 *  A16 * /A15
       + DSL *  A19 *  A18 * /A17 * /A16 * /A15 * /P13
 
-; Disable: (512Kb is bank 1,2 + ROM in bank 3)
-DSMC  = DSL * /A19 * /A18 * /A17 * A16 * /A15       ; the 32Kb of ROM,
-      + DSL * /A19 * /A18 * /A17 * A16 *  A15 * A14 ; the 16Kb of I/O
+; Disable: (512Kb is bank 0,1 + ROM in bank 2)
+DSMC  = /A19 * /A18 * /A17 * A16 * /A15       ; the 32Kb of ROM,
+      + /A19 * /A18 * /A17 * A16 *  A15 * A14 ; the 16Kb of I/O
+      + /A19 *  A18                             ; bank 0
+      +  A19 * /A18                             ; bank 1
+;      +  A19 *  A18                      *  P13 ; bank 2 of RAM
+;      +  A19 *  A18 * A17                * /P13 ; half of bank 2 (RAM) when ROM paged in.
+      +  A19 *  A18 * /A17 * /A16 * /A15 * /P13 ; bank 2 of ROM
 
-      + DSL * /A19 *  A18         ; bank 1
-      + DSL *  A19 * /A18         ; bank 2
-;      + DSL *  A19 *  A18         ; bank 3
-;      + DSL * A19                 ; bank 2 & 3 of RAM (thats include also the second copy of ROM when pagged).
-;      + DSL *  A19 *  A18 * P13   ; bank 3 of RAM
-      + DSL *  A19 *  A18 * /A17 * /A16 * /A15 * /P13 ; bank 3 of ROM
 
 
 ; Really only used on dram memory on original Trump Card, not tested.
