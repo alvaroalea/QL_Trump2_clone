@@ -4,122 +4,85 @@ TrumCardB
 P13 A19 A18 A17 DSL CTQ2 CTQ1 CTQ0 T2 GND
 T3 /CASL MUX /DTACK1L T1 /DTACK2L /RAS2L /RAS1L /RAS0L VCC
 
-RAS0L   = /DSL * /A19 *  A18
-        + /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-RAS1L   = /DSL *  A19 * /A18
-        + /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-RAS2L   = /DSL *  A19 *  A18 * /P13
-        + /DSL *  A19 *  A18 * A17 * P13
-        + /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-
-CASL    = /DSL * /A19 *  A18        * T1
-        + /DSL *  A19 * /A18        * T1
-        + /DSL *  A19 *  A18 * /P13 * T1
-        + /DSL *  A19 *  A18 * A17 *  P13 * T1
-        + /DSL * CTQ2 * CTQ1 * CTQ0 * T1
-
-DTACK1L = /DSL * /A19 *  A18        * T2
-        + /DSL *  A19 * /A18        * T2
-        + /DSL *  A19 *  A18 * A17 *  P13 * T2
-        + /DSL *  A19 *  A18       * /P13 * T2
-
-DTACK2L = GND
-
-; TEST EQUATIONS
-;RAS1L = GND
-;RAS2L = GND
-;DTACK1L = /DSL * /A19 * A18         * /T2
-;CASL    = /DSL * /A19 * A18         * T1
-;        + /DSL * CTQ2 * CTQ1 * CTQ0 * T1
-
 ; ORIGINAL EQUATIONS
-;RAS0L =  A19 *  A18 * /A17 * /P13 * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
-;      +  A19                     * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-;      + /A19 * /A18              * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
-;      + /A19 *  A18              * /DSL * T2
+RAS0L   = /DSL *  A19 *  A18 * /A17 * /P13 * CTQ2 * CTQ1 * CTQ0 * /MUX ; 1/2 ras on mux for refresh (fast) because this is ROM mapped.
+        + /DSL *         A18               * CTQ2 * CTQ1 * CTQ0 * /T3  ; 1/2 the second fall-edge for hidden refresh when access the bank and refresh at same time.
+        + /DSL *  A19                      * CTQ2 * CTQ1 * CTQ0 * /T3  ; 2/2 the second fall-edge for hidden refresh when access the bank and refresh at same time.
+        + /DSL * /A19 * /A18               * CTQ2 * CTQ1 * CTQ0 * /MUX ; 1/2 ras on mux for refresh (fast)
+        + /DSL * /A19 *  A18 * T2                                      ; normal RAS, finish on T2 (to allow second fall-edge for hidden refresh)
 
-;RAS1L =  A19 *  A18 * /A17 * /P13 * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
-;      +         A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-;      + /A19 * /A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
-;      +  A19 * /A18               * /DSL * T2
+RAS1L   = /DSL *  A19 *  A18 * /A17 * /P13 * CTQ2 * CTQ1 * CTQ0 * /MUX
+        + /DSL        *  A18               * CTQ2 * CTQ1 * CTQ0 * /T3
+        + /DSL *  A19                      * CTQ2 * CTQ1 * CTQ0 * /T3
+        + /DSL * /A19 * /A18               * CTQ2 * CTQ1 * CTQ0 * /MUX
+        + /DSL *  A19 * /A18 * T2
 
-;RAS2L =  A19 *  A18 * /A17 * /P13 * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
-;      + /A19 *  A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-;      +  A19 * /A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /T3
-;      + /A19 * /A18               * /DSL * CTQ2 * CTQ1 * CTQ0 * /MUX
-;      +  A19 *  A18 * /A17 * P13  * /DSL * T2
-;      +  A19 *  A18 *  A17        * /DSL * T2
+RAS2L   = /DSL *  A19 *  A18 * /A17 * /P13 * CTQ2 * CTQ1 * CTQ0 * /MUX
+        + /DSL        *  A18               * CTQ2 * CTQ1 * CTQ0 * /T3
+        + /DSL *  A19                      * CTQ2 * CTQ1 * CTQ0 * /T3
+        + /DSL * /A19 * /A18               * CTQ2 * CTQ1 * CTQ0 * /MUX
+        + /DSL *  A19 *  A18 *P13 *  A18 * /A17 * T2
+        + /DSL *  A19 *  A18 * A17 * T2
 
-;CASL =         A18        * /DSL * T1
-;     +  A19               * /DSL * T1
-;     + /A19 * /A18        * /DSL * CTQ2 * CTQ1 * CTQ0
-;     +  A19 *  A18 * /A17 * /DSL * CTQ2 * CTQ1 * CTQ0 * /P13
+CASL    = /DSL *  A19 * /P13 *  A18 * /A17 * CTQ2 * CTQ1 * CTQ0  ; 1/2  early CAS for refresh on acces to other banks (ROM pagged in)
+        + /DSL * /A19 * /A18               * CTQ2 * CTQ1 * CTQ0  ; 2/2  early CAS for refresh on acces to other banks.
+        + /DSL        *  A18               * T1                  ; 1/2 normal CAS after mux when access the bank.
+        + /DSL *  A19                      * T1                  ; 2/2 normal CAS after mux when access the bank.
 
-;DTACK2L =         A18               * /DSL * /T3 * CTQ2 * CTQ1 * CTQ0
-;        +  A19                      * /DSL * /T3 * CTQ2 * CTQ1 * CTQ0
+DTACK2L = /DSL        * A18               * CTQ2 * CTQ1 * CTQ0 * /T3 ; 1/2 late DTACK on T3 when refresh and access to bank at same time.
+        + /DSL *  A19                     * CTQ2 * CTQ1 * CTQ0 * /T3 ; 1/2 late DTACK on T3 when refresh and access to bank at same time.
+        + /DSL *  A19 *  A18 * P13 * /A17 * /CTQ2 * T1              ; 1/3 normal DTACK to half of bank because is ROM pagged in.
+        + /DSL *  A19 *  A18 * P13 * /A17 * /CTQ2 * T1
+        + /DSL *  A19 *  A18 * P13 * /A17 * /CTQ2 * T1
+        + /DSL *  A19 *  A18 * A17 * /CTQ2 * T1                     ; 1/3 normal DTACK for the other half of the bank (alwais pagged in)
+        + /DSL *  A19 *  A18 * A17 * /CTQ1 * T1
 
-;        +  A19 *  A18 * P13  * /A17 * /DSL * T1 * /CTQ2
-;        +  A19 *  A18 * P13  * /A17 * /DSL * T1 * /CTQ1
-;        +  A19 *  A18 * P13  * /A17 * /DSL * T1 * /CTQ0
-
-;        +  A19 *  A18 * A17         * /DSL * T1 * /CTQ2
-;        +  A19 *  A18 * A17         * /DSL * T1 * /CTQ1
-;DTACK1L =  A19 *  A18 * A17         * /DSL * T1 * /CTQ0
-
-;        +  A19 * /A18               * /DSL * T1 * /CTQ2
-;        +  A19 * /A18               * /DSL * T1 * /CTQ1
-;        +  A19 * /A18               * /DSL * T1 * /CTQ0
-
-;        + /A19 *  A18               * /DSL * T1 * /CTQ2
-;        + /A19 *  A18               * /DSL * T1 * /CTQ1
-;        + /A19 *  A18               * /DSL * T1 * /CTQ0
-
+DTACK1L = /DSL *  A19 *  A18 * A17 * /CTQ0 * T1                     ; need 2 outputs for all equations.
+        + /DSL *  A19 * /A18 * /CTQ2 * T1                           ; 2x3 for the normal DTACK in the other 2 banks.
+        + /DSL *  A19 * /A18 * /CTQ1 * T1
+        + /DSL *  A19 * /A18 * /CTQ1 * T1
+        + /DSL * /A19 *  A18 * /CTQ2 * T1
+        + /DSL * /A19 *  A18 * /CTQ1 * T1
+        + /DSL * /A19 *  A18 * /CTQ1 * T1
 
 
 DESCRIPTION:
 CAS, RAS Generation for RAM of Trump Card 2
 
-Ram alwais active (has /OE tied to GND) so output/input only depend on complete of RAS/CAS cycle.
+Ram is alwais active (has /OE tied to GND) so output/input only depend on complete of RAS/CAS cycle.
 U4 is a binary counter, so "CTQ2 * CTQ1 * CTQ0" is activate each 8 memory access cycles (because is clocked to DS (positive).
-RAM use CAS before RAS refresh cycle, that use internal counter of memory.
-
-CAS is lowered for all banks.
-MUX is activated
-RAS is lowered for all banks.
-CAS go up along with RAS of unused banks.
-CAS is lower again with DTACK
-CAS, RAS and DTACK go up.
+RAM use CAS before RAS refresh cycle, when access a other banks of the memory, that use internal counter of memory.
+when access the same bank of the chip and the counter indicate refresh, use hidden refresh with double RAS.
 
 EXTERNAL TIME CHRONOGRAPH:
-
 DS    ---------\______________/---------
 CLKCT _________/--------------\_________
-MUX   ------------\___________/---------   (to 1 inmediately by discharge of diode , to 0 timed by charge of C5 by R3)
-T1    _______________/--------\_________   (to 0 inmediately by diode D9, to 1 timed by discharge of C4 by R2)
-T2    ------------------\_____/---------   (to 1 inmediately by diode D5, to 0 timed by charge of C3 by R1)
-T3    ---------------------\__/---------   (to 1 inmediately by diode D4, to 0 timed by discharge of C2 by R4)
+MUX   ------------\___________/---------   (to 1 inmediately by discharge of diode , to 0 timed from CLKCT by charge of C5 by R3)
+T1    _______________/--------\_________   (to 0 inmediately by diode D9, to 1 timed from MUX by discharge of C4 by R2)
+T2    ------------------\_____/---------   (to 1 inmediately by diode D5, to 0 timed from T1 by charge of C3 by R1)
+T3    ---------------------\__/---------   (to 1 inmediately by diode D4, to 0 timed from T2 by discharge of C2 by R4)
 
-SAMPLE OF READING BANK 1:
+
+SAMPLE OF READING BANK 1: (as per Original)
 
       I/O  & CTQ0 & CTQ1 & CTQ2     I/O & NOT CTQx             no I/O & CTQx
-DS    ---\__________________/--- ---\__________________/--- ---\__________________/---
-CLKCT ___/------------------\___ ___/------------------\___ ___/------------------\___
-MUX   -------\______________/--- ------\_______________/--- ------\_______________/---
-T1    __________/-----------\___ __________/-----------\___ __________/-----------\___
-T2    --------------\_______/--- --------------\_______/--- --------------\_______/---
-T3    ------------------\___/--- ------------------\___/--- ------------------\___/---
+DS    ---\___________________/--- ---\___________________/--- ---\___________________/---
+CLKCT ___/-------------------\___ ___/-------------------\___ ___/-------------------\___
+MUX   -------\_______________/--- ------\________________/--- ------\________________/---
+T1    ___________/-----------\___ ___________/-----------\___ ___________/-----------\___
+T2    ---------------\_______/--- ---------------\_______/--- ---------------\_______/---
+T3    -------------------\___/--- -------------------\___/--- -------------------\___/---
 
-CAS   ----------\___________/--- ----------\___________/--- ----------\___________/---
-RAS0  ------------------\___/--- -------------------------- ------------------\___/---
-RAS1  ---\__________________/--- ---\__________________/--- ------------------\___/---
-RAS2  ------------------\___/------------------------------ ------------------\___/---
-DTACK -------------\________/--- --------------\_______/--- --------------------------
+CAS   -----------\___________/--- -----------\__XXXXXXXXXX--- ---\__________XXXXXXXXXX---
+RAS0  -------------------\___/--- --------------------------- ------\_______XXXXXXXXXX---
+RAS1  ---\___________/---\___/--- ---\__________XX----------- ------\_______XXXXXXXXXX---
+RAS2  -------------------\___/--- --------------------------- ------\_______XXXXXXXXXX---
+DTACK -------------------\___/--- -----------\__XXXXXXXXXX--- ---------------------------
+         D   M   1   2   3   E       D   M   1   2   3   E       D   M   1   2   3   E
 
+XXX -> Means that depend on DS, if up early, up also.
 
-
-
-
-
+So, there is a wait-state in 1 of 8 memory access, if any of the RAM of the trump is used.
 
 
 
