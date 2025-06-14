@@ -25,7 +25,7 @@ Chip 2 for TC2 include JED for GAL and PAL, but is know that only the PAL work.
 
 My own version of the equations of the chip 1, intended to be used in a board without RAM with external RAM expansion.
 
-This version only work with Minerva ROM, because it lack the pagging mechanism needed to boot in a JS ROM.
+This version only work with Minerva ROM, because it lack the pagging mechanism needed to boot in a JS ROM, this version is save to use with 768Kb external expansion, to achive the 892Kb (maximun RAM in a QL)
 
 Include the Winculp source.
 
@@ -35,6 +35,6 @@ The Work-In-Progress ecuations
 
 Chip 1 version with the pagging mechanish that work in JS and Minerva Roms. Miracle sell serveral version of the card with diferent memory configurations, its not clear if the ecuations of the chips are the same in all version, but in my test I need to develop version for each memory configuration. Source is in GALASM format
 
-Only 0Kb has been tested.
+Only 0Kb has been tested, this GAL is Safe to use with any external RAM expansion up to 512 Kb, can also be used my own +256Kb RAM expansion if wire the P13 of GAL1 to the RAM expansion Card.
 
 Chip 2 are still not working, but include some test in GALASM and Winculp formats, and some notes.
