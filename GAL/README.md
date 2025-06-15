@@ -38,3 +38,9 @@ Chip 1 version with the pagging mechanish that work in JS and Minerva Roms. Mira
 Only 0Kb has been tested, this GAL is Safe to use with any external RAM expansion up to 512 Kb, can also be used my own +256Kb RAM expansion if wire the P13 of GAL1 to the RAM expansion Card.
 
 Chip 2 are still not working, but include some test in GALASM and Winculp formats, and some notes.
+
+# Technical Details
+
+Our guest of the timmings need for access memory of the trump card are as per next graphics:
+
+![My image](timmings_trump2.png)
