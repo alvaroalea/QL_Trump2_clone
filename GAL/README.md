@@ -43,4 +43,15 @@ Chip 2 are still not working, but include some test in GALASM and Winculp format
 
 Our guest of the timmings need for access memory of the trump card are as per next graphics:
 
+Normal read cycle
+![My image](read.png)
+
+A refresh cycle using cas-before-ras method
+![My image](cas_before_ras.png)
+
+
+A read cycle plus a hidden refresh using a second RAS pulse.
+![My image](hidden_read.png)
+
+
 ![My image](timmings_trump2.png)
