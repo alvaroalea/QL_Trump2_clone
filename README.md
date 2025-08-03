@@ -14,7 +14,7 @@ Check the readme in the GAL folder, up to now, I only be able to make it work wi
 
 # Technical Info
 
-## Components to use.
+## Components to use
 
 ### 4040
 We found that not all manufacturer made CD4040 or 74HC4040 in the same way, and some made counter with rise-edge of clock, and some with falling-edge.
@@ -36,7 +36,7 @@ Motorola (MCM514256) Siemens (HYB514256) and OKI (MSM514256) has been reported t
 
 Toshiba (TC514256) and GoldStart (GM71C4256) al also valid acording to datasheet, but not tested.
 
-The trump card schematic used 0 wait state ram, even in the refresh cycle, and for that peed of the DRam, it shall be between 70 and 100ns, 120ns or slower are not valid.
+The trump card schematic used 0 wait state ram, even in the refresh cycle, and for that speed of the dram shall be between 70 and 100ns, 120ns or slower are not valid.
 
 
 HOLD
